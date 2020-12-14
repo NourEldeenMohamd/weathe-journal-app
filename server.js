@@ -44,10 +44,13 @@ app.post('/add', addInfo)
 
 function addInfo (req, res) {
     console.log(req.body);
-    entreData = {
+    /*entreData = {
       date: req.body.date,
       temp: req.body.temp,
       content: req.body.content
     }
-    projectData.push(entreData);
+    projectData.push(entreData);*/
+    projectData['date'] = req.body.date;
+    projectData['temp'] = req.body.temp;
+    projectData['content'] = req.body.content;
 }
