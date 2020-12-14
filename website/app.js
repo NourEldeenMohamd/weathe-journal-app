@@ -18,7 +18,7 @@ function generateFun(e) {
 
   .then(function (data){
     console.log(data);
-    postData("/add", {date: newDate, temp: data.list[0].main.temp, content: feelings});
+    postData("/add", {date: newDate, temp: temp, content: feelings});
     updateUI();
   })
 
