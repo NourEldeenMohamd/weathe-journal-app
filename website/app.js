@@ -1,14 +1,14 @@
 /* Global Variables */
 // {zip code},{country code}&appid={API key}
 const urlLink = "http://api.openweathermap.org/data/2.5/weather?zip=";
-const apiKey = "&appid=c649ab0b16f5e209a2f0024deb9d9906";
+const apiKey = "&appid=c649ab0b16f5e209a2f0024deb9d9906&units=imperial";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
 // Event listener to add function to existing HTML DOM element
-document.getElementById("generate") = addEventListener("click", generateFun);
+document.getElementById("generate").addEventListener("click", generateFun);
 
 /* Function called by event listener */
 function generateFun(e) {
@@ -18,7 +18,8 @@ function generateFun(e) {
 
   .then(function (data){
     console.log(data);
-    postData("/add", {date: newDate, temp: data.list[0].main.temp, content: feelings})
+    postData("/add", {date: newDate, temp: data.list[0].main.temp, content: feelings});
+    updateUI();
   })
 
 }
@@ -28,7 +29,7 @@ const getWeather = async(urlLink, zipCode, apiKey) => {
   const res = await fetch(urlLink + zipCode + apiKey);
 
   try {
-    const data = await res.JSON();
+    const data = await res.json();
     console.log(data);
   } 
   catch {
@@ -39,7 +40,7 @@ const getWeather = async(urlLink, zipCode, apiKey) => {
 /* Function To POST Data */
 const postData = async(url = '', data = {}) => {
   console.log(data);
-  const response = await fatch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',
     header: {
